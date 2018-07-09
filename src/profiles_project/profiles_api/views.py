@@ -129,7 +129,7 @@ class SendAlarmViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             SMTPserver = 'smtp.gmail.com'
             sender = 'chelsea.rudde@gmail.com'
-            destination = ['firdaus.abhar@gmail.com]
+            destination = ['firdaus.abhar@gmail.com']
             USERNAME = "chelsea.rudde@gmail.com"
             PASSWORD = "PapaBosan1"
 
