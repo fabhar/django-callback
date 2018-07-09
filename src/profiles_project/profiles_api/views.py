@@ -112,7 +112,7 @@ class GetTokenViewSet(viewsets.ViewSet):
         return Response({'http_method': 'DELETE'})
 
 class SendAlarmViewSet(viewsets.ViewSet):
-    """GetToken API ViewSet."""
+    """SendAlarm API ViewSet."""
 
     serializer_class = serializers.SendAlarmSerializer
 
@@ -155,7 +155,7 @@ class SendAlarmViewSet(viewsets.ViewSet):
 
 
 class SendFaultViewSet(viewsets.ViewSet):
-    """GetToken API ViewSet."""
+    """SendFault API ViewSet."""
 
     serializer_class = serializers.SendFaultSerializer
 
