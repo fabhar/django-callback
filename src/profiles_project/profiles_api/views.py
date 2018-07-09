@@ -145,11 +145,7 @@ class SendAlarmViewSet(viewsets.ViewSet):
                smtpObj.sendmail(sender, receivers, message)
                emailResult = "Successfully sent email"
                print emailResult
-           except Exception, exc:
-               emailResult = "Error: unable to send email"
-               print emailResult
-            #name = serializer.data.get('userId')
-            #message = 'Access token for: {0}'.format(name)
+
             return Response({'status': '0', 'message': emailResult})
         else:
             return Response(
