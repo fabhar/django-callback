@@ -7,7 +7,8 @@ class HelloSerializer(serializers.Serializer):
     """Serializes a name field for testing our APIView."""
 
     userId = serializers.CharField(max_length=10)
-
+    time = serializers.CharField(max_length=10)
+    sign = serializers.CharField(max_length=10)
 
 class UserProfileSerializer(serializers.ModelSerializer):
     """A serializer for our user profile objects."""

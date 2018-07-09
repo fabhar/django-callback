@@ -86,7 +86,7 @@ class GetTokenViewSet(viewsets.ViewSet):
         if serializer.is_valid():
             name = serializer.data.get('userId')
             message = 'Access token for: {0}'.format(name)
-            return Response({'status': '0', 'data': '', 'accessToken': 'test', 'expiresTime': '0', 'message': name})
+            return Response({'status': '0', 'data': '', 'accessToken': 'test', 'expiresTime': '0', 'message': message})
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
