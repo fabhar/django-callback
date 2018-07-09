@@ -139,6 +139,7 @@ class SendAlarmViewSet(viewsets.ViewSet):
             Test message
             """
             subject="Sent from Python"
+            emailResult="sent"
 
             try:
                 msg = MIMEText(content, text_subtype)
@@ -154,9 +155,9 @@ class SendAlarmViewSet(viewsets.ViewSet):
                     conn.quit()
 
             except Exception, exc:
-                print "mail failed"
+                emailResult = "mail failed"
 
-            return Response({'status': '0', 'message': ''})
+            return Response({'status': '0', 'message': emailResult})
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
