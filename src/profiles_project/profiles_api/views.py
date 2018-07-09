@@ -1,4 +1,5 @@
 from smtplib import SMTP_SSL as SMTP
+from email.mime.text import MIMEText
 from django.shortcuts import render
 
 from rest_framework import viewsets
@@ -126,25 +127,36 @@ class SendAlarmViewSet(viewsets.ViewSet):
         serializer = serializers.SendAlarmSerializer(data=request.data)
 
         if serializer.is_valid():
-            sender = 'chelsea.rudde@gmail.com'
-            receivers = ['firdaus.abhar@gmail.com']
+            SMTPserver = 'smtp.gmail.com'
+            sender =     'chelsea.rudde@gmail.com'
+            destination = ['firdaus.abhar@gmail.com]
 
-            message = """From: From Person <chelsea.rudde@gmail.com>
-            To: To Person <firdaus.abhar@gmail.com>
-            Subject: SMTP e-mail test
+            USERNAME = "chelsea.rudde@gmail.com"
+            PASSWORD = "PapaBosan1"
 
-            This is a test e-mail message.
+            # typical values for text_subtype are plain, html, xml
+            text_subtype = 'plain'
+            content="""\
+            Test message
             """
 
-            emailResult = "Successfully sent email"
+            subject="Sent from Python"
 
             try:
-               smtpObj = SMTP('smtp.gmail.com')
-               smtpObj.set_debuglevel(False)
-               smtpObj.login('chelsea.rudde@gmail.com', 'PapaBosan1')
-               smtpObj.sendmail(sender, receivers, message)
-               emailResult = "Successfully sent email"
-               print emailResult
+                msg = MIMEText(content, text_subtype)
+                msg['Subject']=       subject
+                msg['From']   = sender # some SMTP servers will do this automatically, not all
+
+                conn = SMTP(SMTPserver)
+                conn.set_debuglevel(False)
+                conn.login(USERNAME, PASSWORD)
+                try:
+                    conn.sendmail(sender, destination, msg.as_string())
+                finally:
+                    conn.quit()
+
+            except Exception, exc:
+                sys.exit( "mail failed; %s" % str(exc) ) # give a error message
 
             return Response({'status': '0', 'message': emailResult})
         else:
