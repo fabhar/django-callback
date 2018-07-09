@@ -147,8 +147,6 @@ class SendAlarmViewSet(viewsets.ViewSet):
                 msg['From'] = sender # some SMTP servers will do this automatically, not all
 
                 conn = SMTP("smtp.gmail.com", 587)
-                conn.ehlo()
-                conn.starttls()
                 conn.login(USERNAME, PASSWORD)
                 try:
                     conn.sendmail(sender, destination, msg.as_string())
