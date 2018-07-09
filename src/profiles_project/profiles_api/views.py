@@ -1,5 +1,4 @@
-import smtplib
-
+from smtplib import SMTP_SSL as SMTP
 from django.shortcuts import render
 
 from rest_framework import viewsets
@@ -140,13 +139,13 @@ class SendAlarmViewSet(viewsets.ViewSet):
             emailResult = "Successfully sent email"
 
             try:
-               smtpObj = smtplib.SMTP('smtp.gmail.com')
+               smtpObj = SMTP('smtp.gmail.com')
                smtpObj.set_debuglevel(False)
                smtpObj.login('chelsea.rudde@gmail.com', 'PapaBosan1')
                smtpObj.sendmail(sender, receivers, message)
                emailResult = "Successfully sent email"
                print emailResult
-            except SMTPException:
+           except Exception, exc:
                emailResult = "Error: unable to send email"
                print emailResult
             #name = serializer.data.get('userId')
