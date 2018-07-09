@@ -111,6 +111,92 @@ class GetTokenViewSet(viewsets.ViewSet):
 
         return Response({'http_method': 'DELETE'})
 
+class SendAlarmViewSet(viewsets.ViewSet):
+    """GetToken API ViewSet."""
+
+    serializer_class = serializers.SendAlarmSerializer
+
+    def list(self, request):
+        return Response({'status': '0', 'message': 'none'})
+
+    def create(self, request):
+        """Create a new token for given userId."""
+
+        serializer = serializers.SendAlarmSerializer(data=request.data)
+
+        if serializer.is_valid():
+            name = serializer.data.get('userId')
+            message = 'Access token for: {0}'.format(name)
+            return Response({'status': '0', 'message': ""})
+        else:
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+        """Handles getting an object by its ID."""
+
+        return Response({'http_method': 'GET'})
+
+    def update(self, request, pk=None):
+        """Handles updating an object."""
+
+        return Response({'http_method': 'PUT'})
+
+    def partial_update(self, request, pk=None):
+        """Handles updating part of an object."""
+
+        return Response({'http_method': 'PATCH'})
+
+    def destroy(self, request, pk=None):
+        """Handles removing an object."""
+
+        return Response({'http_method': 'DELETE'})
+
+
+
+class SendFaultViewSet(viewsets.ViewSet):
+    """GetToken API ViewSet."""
+
+    serializer_class = serializers.SendFaultSerializer
+
+    def list(self, request):
+        return Response({'status': '0', 'message': 'none'})
+
+    def create(self, request):
+        """Create a new token for given userId."""
+
+        serializer = serializers.SendFaultSerializer(data=request.data)
+
+        if serializer.is_valid():
+            name = serializer.data.get('userId')
+            message = 'Access token for: {0}'.format(name)
+            return Response({'status': '0', 'message': ""})
+        else:
+            return Response(
+                serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, pk=None):
+        """Handles getting an object by its ID."""
+
+        return Response({'http_method': 'GET'})
+
+    def update(self, request, pk=None):
+        """Handles updating an object."""
+
+        return Response({'http_method': 'PUT'})
+
+    def partial_update(self, request, pk=None):
+        """Handles updating part of an object."""
+
+        return Response({'http_method': 'PATCH'})
+
+    def destroy(self, request, pk=None):
+        """Handles removing an object."""
+
+        return Response({'http_method': 'DELETE'})
+
+
+
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     """Handles creating, creating and updating profiles."""

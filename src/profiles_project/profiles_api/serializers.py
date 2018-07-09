@@ -10,6 +10,25 @@ class HelloSerializer(serializers.Serializer):
     time = serializers.CharField(max_length=10)
     sign = serializers.CharField(max_length=10)
 
+class SendAlarmSerializer(serializers.Serializer):
+    """Serializes a name field for testing our APIView."""
+
+    accessToken = serializers.CharField(max_length=10)
+    deviceCode = serializers.CharField(max_length=10)
+    warningList = serializers.CharField(max_length=10)
+    alarmId = serializers.CharField(max_length=10)
+    alarmTime = serializers.CharField(max_length=10)
+
+class SendFaultSerializer(serializers.Serializer):
+    """Serializes a name field for testing our APIView."""
+
+    accessToken = serializers.CharField(max_length=10)
+    deviceCode = serializers.CharField(max_length=10)
+    faultList = serializers.CharField(max_length=10)
+    faultCode = serializers.CharField(max_length=10)
+    faultTime = serializers.CharField(max_length=10)
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     """A serializer for our user profile objects."""
 

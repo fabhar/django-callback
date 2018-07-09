@@ -7,9 +7,8 @@ from . import views
 
 router = DefaultRouter()
 router.register('token/getToken', views.GetTokenViewSet, base_name='getToken')
-router.register('profile', views.UserProfileViewSet)
-router.register('login', views.LoginViewSet, base_name='login')
-router.register('feed', views.UserProfileFeedViewSet)
+router.register('collect/sendAlarm', views.SendAlarmViewSet, base_name='sendAlarm')
+router.register('collect/sendFault', views.SendFaultViewSet, base_name='sendFault')
 
 urlpatterns = [
     url(r'^hello-view/', views.HelloApiView.as_view()),
