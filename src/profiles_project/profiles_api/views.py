@@ -128,9 +128,8 @@ class SendAlarmViewSet(viewsets.ViewSet):
 
         if serializer.is_valid():
             SMTPserver = 'smtp.gmail.com'
-            sender =     'chelsea.rudde@gmail.com'
+            sender = 'chelsea.rudde@gmail.com'
             destination = ['firdaus.abhar@gmail.com]
-
             USERNAME = "chelsea.rudde@gmail.com"
             PASSWORD = "PapaBosan1"
 
@@ -139,13 +138,12 @@ class SendAlarmViewSet(viewsets.ViewSet):
             content="""\
             Test message
             """
-
             subject="Sent from Python"
 
             try:
                 msg = MIMEText(content, text_subtype)
-                msg['Subject']=       subject
-                msg['From']   = sender # some SMTP servers will do this automatically, not all
+                msg['Subject']= subject
+                msg['From'] = sender # some SMTP servers will do this automatically, not all
 
                 conn = SMTP(SMTPserver)
                 conn.set_debuglevel(False)
