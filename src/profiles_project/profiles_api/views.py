@@ -1,3 +1,5 @@
+import smtplib
+
 from django.shortcuts import render
 
 from rest_framework import viewsets
@@ -125,9 +127,31 @@ class SendAlarmViewSet(viewsets.ViewSet):
         serializer = serializers.SendAlarmSerializer(data=request.data)
 
         if serializer.is_valid():
-            name = serializer.data.get('userId')
-            message = 'Access token for: {0}'.format(name)
-            return Response({'status': '0', 'message': ""})
+            sender = 'chelsea.rudde@gmail.com'
+            receivers = ['firdaus.abhar@gmail.com']
+
+            message = """From: From Person <chelsea.rudde@gmail.com>
+            To: To Person <firdaus.abhar@gmail.com>
+            Subject: SMTP e-mail test
+
+            This is a test e-mail message.
+            """
+
+            emailResult = "Successfully sent email"
+
+            try:
+               smtpObj = smtplib.SMTP('smtp.gmail.com')
+               smtpObj.set_debuglevel(False)
+               smtpObj.login('chelsea.rudde@gmail.com', 'PapaBosan1')
+               smtpObj.sendmail(sender, receivers, message)
+               emailResult = "Successfully sent email"
+               print emailResult
+            except SMTPException:
+               emailResult = "Error: unable to send email"
+               print emailResult
+            #name = serializer.data.get('userId')
+            #message = 'Access token for: {0}'.format(name)
+            return Response({'status': '0', 'message': emailResult})
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
