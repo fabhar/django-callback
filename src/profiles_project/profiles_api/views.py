@@ -155,7 +155,7 @@ class SendAlarmViewSet(viewsets.ViewSet):
                     conn.quit()
 
             except Exception, exc:
-                emailResult = "mail failed"
+                emailResult = "mail failed; %s" % str(exc)
 
             return Response({'status': '0', 'message': emailResult})
         else:
