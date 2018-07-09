@@ -146,13 +146,14 @@ class SendAlarmViewSet(viewsets.ViewSet):
                 msg['Subject']= subject
                 msg['From'] = sender # some SMTP servers will do this automatically, not all
 
-                conn = SMTP(SMTPserver)
-                conn.set_debuglevel(False)
+                conn = SMTP("smtp.gmail.com", 587)
+                conn.ehlo()
+                conn.starttls()
                 conn.login(USERNAME, PASSWORD)
                 try:
                     conn.sendmail(sender, destination, msg.as_string())
                 finally:
-                    conn.quit()
+                    conn.close()
 
             except Exception, exc:
                 emailResult = "mail failed; %s" % str(exc)
