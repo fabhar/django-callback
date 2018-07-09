@@ -64,30 +64,29 @@ class HelloApiView(APIView):
 
 
 class GetTokenViewSet(viewsets.ViewSet):
-    """Test API ViewSet."""
+    """GetToken API ViewSet."""
 
     serializer_class = serializers.HelloSerializer
 
     def list(self, request):
-        """Return a hello message."""
+        """Returns a user token."""
 
-        a_viewset = [
-            'Uses actions (list, create, retrieve, update, partial_update)',
-            'Automatically maps to URLs using Routers',
-            'Provides more functionality with less code.'
+        data_set = [
+            'By default, all Callbacks will return emails',
+            'to admin: firdaus.abhar@gmail.com'
         ]
 
-        return Response({'message': 'Hello!', 'a_viewset': a_viewset})
+        return Response({'status': '0', 'data': data_set, 'accessToken': 'test', 'expiresTime': '0', 'message': 'none'})
 
     def create(self, request):
-        """Create a new hello message."""
+        """Create a new token for given userId."""
 
         serializer = serializers.HelloSerializer(data=request.data)
 
         if serializer.is_valid():
-            name = serializer.data.get('name')
-            message = 'Hello {0}'.format(name)
-            return Response({'message': message})
+            name = serializer.data.get('userId')
+            message = 'Access token for: {0}'.format(name)
+            return Response({'status': '0', 'data': '', 'accessToken': 'test', 'expiresTime': '0', 'message': name})
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
