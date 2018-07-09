@@ -63,7 +63,7 @@ class HelloApiView(APIView):
         return Response({'method': 'delete'})
 
 
-class HelloViewSet(viewsets.ViewSet):
+class GetTokenViewSet(viewsets.ViewSet):
     """Test API ViewSet."""
 
     serializer_class = serializers.HelloSerializer
