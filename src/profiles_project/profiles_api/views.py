@@ -156,7 +156,7 @@ class SendAlarmViewSet(viewsets.ViewSet):
             except Exception, exc:
                 print "mail failed"
 
-            return Response({'status': '0', 'message': emailResult})
+            return Response({'status': '0', 'message': ''})
         else:
             return Response(
                 serializer.errors, status=status.HTTP_400_BAD_REQUEST)
