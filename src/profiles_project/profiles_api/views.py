@@ -147,11 +147,13 @@ class SendAlarmViewSet(viewsets.ViewSet):
                 msg['From'] = sender # some SMTP servers will do this automatically, not all
 
                 conn = SMTP("smtp.gmail.com", 587)
+                conn.ehlo()
                 conn.login(USERNAME, PASSWORD)
+                conn.ehlo()
                 try:
                     conn.sendmail(sender, destination, msg.as_string())
                 finally:
-                    conn.close()
+                    conn.quit()
 
             except Exception, exc:
                 emailResult = "mail failed; %s" % str(exc)
